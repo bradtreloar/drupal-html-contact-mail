@@ -1,0 +1,39 @@
+<?php
+
+use Drupal\Component\Render\FormattableMarkup;
+
+/**
+ * Implement hook_mail_alter()
+ *
+ * Transforms mail messages into HTML.
+ */
+function html_contact_mail_mail_alter(&$message) {
+
+  if (isset($message['id']) && $message['id'] == 'contact_page_mail') {
+    // Get the \Drupal\contact\Entity\Message
+    $contact_message = $message['params']['contact_message'];
+
+    // Get fields.
+    $variables = [
+      'Name' => $contact_message->getSenderName(),
+      'Phone' => '',
+      'Email' => $contact_message->getSenderMail(),
+      'Subject' => $contact_message->getSubject(),
+      'Message' => $contact_message->getMessage(),
+    ];
+
+    if (!$contact_message->get('field_phone')->isEmpty()) {
+      $variables['Phone'] = $contact_message->get('field_phone')->getString();
+    } else {
+      unset($variables['Phone']);
+    }
+
+    // Replace message body.
+    $template_file = drupal_get_path('module', 'html_contact_mail') .'/templates/html-contact-mail.html.twig';
+    $twig_service = \Drupal::service('twig');
+    $body = $twig_service->loadTemplate($template_file)->render($variables);
+    $message['body'] = [
+      new FormattableMarkup($body, [])
+    ];
+  }
+}

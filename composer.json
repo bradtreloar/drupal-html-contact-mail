@@ -1,0 +1,18 @@
+{
+    "name": "bradtreloar/html_contact_mail",
+    "description": "Converts contact form message to HTML.",
+    "type": "drupal-module",
+    "keywords": ["Drupal"],
+    "homepage": "https://www.github.com/bradtreloar/alkaline-mail",
+    "support": {
+      "issues": "https://www.github.com/bradtreloar/alkaline-mail/issues",
+      "source": "https://www.github.com/bradtreloar/alkaline-mail.git"
+    },
+    "license": "GPL-2.0+",
+    "authors": [
+        {
+            "name": "Brad Treloar",
+            "email": "brad@treloardigital.com.au"
+        }
+    ]
+}

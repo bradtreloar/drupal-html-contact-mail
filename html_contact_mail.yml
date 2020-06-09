@@ -1,0 +1,4 @@
+name: 'HTML Contact Mail'
+type: module
+description: 'Converts contact form message to HTML.'
+core: 8.x
